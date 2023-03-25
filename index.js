@@ -2,7 +2,6 @@ var TXT = 'txt',
     XML = 'xml';
 
 var parseAscii = require('parse-bmfont-ascii');
-var parseXML = require('parse-bmfont-xml');
 
 /**
  * Parses a string (or Node Buffer) that is either XML data (with a root <font> element),
@@ -49,13 +48,11 @@ function parse(data, format) {
             throw "malformed XML/TXT bitmap font file";
     }
     
-    if (format !== XML && format !== TXT)
-        throw "only xml and txt formats are currently supported";
+    if (format !== TXT)
+        throw "only txt formats are currently supported";
     
     if (format === TXT) {
         return parseAscii(data);
-    } else {
-        return parseXML(data);
     }
 }
 
